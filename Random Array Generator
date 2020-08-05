@@ -1,0 +1,48 @@
+package sortselectionPr;
+
+import java.util.Random;
+
+public class SortSelectionFall18
+{
+    public static void main(String[] args)
+    {
+        // generate random ints for array
+        Random r = new Random();
+        
+        int [ ] x = new int[25000];
+        //int [ ] x = { 5, 12, 13, 7, 3, 18, 11, 15, 8 };
+        
+        for (int k = 0; k < x.length; k++)
+            x[k] = r.nextInt(5000);
+        
+        // display array
+        
+        for (int h = 0; h < x.length; h ++)
+            System.out.print(x[h] + " ");
+        System.out.println("\n=========================");
+
+        // outer is "slow moving," get smallest of remaining in each position
+        for (int outer = 0; outer < x.length-1; outer++)
+        {
+            int smallestAt = outer;   // assume smallest at "top" of this segment
+            
+            // inner goes forward from outer
+            for (int inner = outer + 1; inner < x.length; inner++)
+            {
+                if (x[inner] < x[smallestAt])    // found a new smallest
+                    smallestAt = inner;          // remember where it is
+            }
+            
+            // swap smallest with top position of this array segment
+            
+            int temp = x[outer];
+            x[outer] = x[smallestAt];
+            x[smallestAt] = temp; 
+        }
+        
+        // display again
+        for (int h = 0; h < x.length; h ++)
+            System.out.print(x[h] + " ");
+        System.out.println();        
+    }
+}
